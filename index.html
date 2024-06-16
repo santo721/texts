@@ -22,14 +22,26 @@
 
         function saveText() {
             const text = document.getElementById('textInput').value;
-            localStorage.setItem('savedText', text);
-            document.getElementById('statusMessage').innerText = 'Text saved successfully!';
+            try {
+                localStorage.setItem('savedText', text);
+                console.log('Text saved:', text);
+                document.getElementById('statusMessage').innerText = 'Text saved successfully!';
+            } catch (e) {
+                console.error('Error saving text:', e);
+                document.getElementById('statusMessage').innerText = 'Error saving text!';
+            }
         }
 
         function loadText() {
-            const text = localStorage.getItem('savedText');
-            document.getElementById('textInput').value = text || '';
-            document.getElementById('statusMessage').innerText = 'Text loaded successfully!';
+            try {
+                const text = localStorage.getItem('savedText');
+                document.getElementById('textInput').value = text || '';
+                console.log('Text loaded:', text);
+                document.getElementById('statusMessage').innerText = 'Text loaded successfully!';
+            } catch (e) {
+                console.error('Error loading text:', e);
+                document.getElementById('statusMessage').innerText = 'Error loading text!';
+            }
         }
 
         function addText() {
