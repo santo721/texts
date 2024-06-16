@@ -14,6 +14,7 @@
             var password = prompt("Please enter the password:");
             if (password === "santonigga") {
                 document.body.style.display = "block";
+                loadText(); // Load saved text when the page is unlocked
             } else {
                 alert("Incorrect password!");
             }
@@ -22,50 +23,13 @@
 
         function saveText() {
             const text = document.getElementById('textInput').value;
-            try {
-                localStorage.setItem('savedText', text);
-                console.log('Text saved:', text);
-                document.getElementById('statusMessage').innerText = 'Text saved successfully!';
-            } catch (e) {
-                console.error('Error saving text:', e);
-                document.getElementById('statusMessage').innerText = 'Error saving text!';
-            }
+            localStorage.setItem('savedText', text);
+            alert('Text saved successfully!');
         }
 
         function loadText() {
-            try {
-                const text = localStorage.getItem('savedText');
-                document.getElementById('textInput').value = text || '';
-                console.log('Text loaded:', text);
-                document.getElementById('statusMessage').innerText = 'Text loaded successfully!';
-            } catch (e) {
-                console.error('Error loading text:', e);
-                document.getElementById('statusMessage').innerText = 'Error loading text!';
-            }
-        }
-
-        function addText() {
-            const additionalText = prompt("Enter the text to add:");
-            if (additionalText) {
-                document.getElementById('textInput').value += additionalText;
-                document.getElementById('statusMessage').innerText = 'Text added successfully!';
-            }
-        }
-
-        function modifyText() {
-            const textToModify = prompt("Enter the text to modify:");
-            const modifiedText = prompt("Enter the new text:");
-            const textArea = document.getElementById('textInput');
-            textArea.value = textArea.value.replace(textToModify, modifiedText);
-            document.getElementById('statusMessage').innerText = 'Text modified successfully!';
-        }
-
-        function replaceText() {
-            const newText = prompt("Enter the new text:");
-            if (newText) {
-                document.getElementById('textInput').value = newText;
-                document.getElementById('statusMessage').innerText = 'Text replaced successfully!';
-            }
+            const text = localStorage.getItem('savedText');
+            document.getElementById('textInput').value = text || '';
         }
     </script>
 </head>
@@ -73,9 +37,6 @@
     <h1>Protected Text Editor for MCQ Generation</h1>
     <textarea id="textInput"></textarea>
     <br>
-    <button onclick="addText()">Add Text</button>
-    <button onclick="modifyText()">Modify Text</button>
-    <button onclick="replaceText()">Replace Text</button>
     <button onclick="saveText()">Save Text</button>
     <button onclick="loadText()">Load Text</button>
     <p id="statusMessage"></p>
