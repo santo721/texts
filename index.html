@@ -19,20 +19,7 @@
             }
         }
         window.onload = checkPassword;
-    </script>
-</head>
-<body>
-    <h1>Protected Text Editor for MCQ Generation</h1>
-    <textarea id="textInput"></textarea>
-    <br>
-    <button onclick="addText()">Add Text</button>
-    <button onclick="modifyText()">Modify Text</button>
-    <button onclick="replaceText()">Replace Text</button>
-    <button onclick="saveText()">Save Text</button>
-    <button onclick="loadText()">Load Text</button>
-    <p id="statusMessage"></p>
 
-    <script>
         function saveText() {
             const text = document.getElementById('textInput').value;
             localStorage.setItem('savedText', text);
@@ -55,4 +42,30 @@
 
         function modifyText() {
             const textToModify = prompt("Enter the text to modify:");
-            const modifiedText = p
+            const modifiedText = prompt("Enter the new text:");
+            const textArea = document.getElementById('textInput');
+            textArea.value = textArea.value.replace(textToModify, modifiedText);
+            document.getElementById('statusMessage').innerText = 'Text modified successfully!';
+        }
+
+        function replaceText() {
+            const newText = prompt("Enter the new text:");
+            if (newText) {
+                document.getElementById('textInput').value = newText;
+                document.getElementById('statusMessage').innerText = 'Text replaced successfully!';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Protected Text Editor for MCQ Generation</h1>
+    <textarea id="textInput"></textarea>
+    <br>
+    <button onclick="addText()">Add Text</button>
+    <button onclick="modifyText()">Modify Text</button>
+    <button onclick="replaceText()">Replace Text</button>
+    <button onclick="saveText()">Save Text</button>
+    <button onclick="loadText()">Load Text</button>
+    <p id="statusMessage"></p>
+</body>
+</html>
